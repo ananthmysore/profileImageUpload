@@ -1,11 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import defaultImage from '../selectPhoto.png';
+import { uploadProfileImage } from '../Actions';
+import logoSymbol from '../logo-symbol.png';
 
 class ImageUpload extends React.Component {
+
+  constructor(props){
+    super(props);
+    this._handleSubmit = this._handleSubmit.bind(this);
+  }
   state = {
     file: '',
     imagePreviewUrl: null
   };
+
 
   _handleCancel(){
     this.setState({
@@ -16,7 +26,12 @@ class ImageUpload extends React.Component {
 
   _handleSubmit(e) {
     e.preventDefault();
-    console.log('handle uploading-', this.state.file);
+    const { dispatch } = this.props;
+    dispatch(uploadProfileImage(this.state.file))
+    this.setState({
+      file:'',
+      imagePreviewUrl: null
+    });
   }
 
   _handleImageChange(e) {
@@ -39,11 +54,14 @@ class ImageUpload extends React.Component {
 
   render() {
     let { imagePreviewUrl } = this.state;
-
+    let { uploadedProfileImage } = this.props;
+    
     return (
       <div className="previewComponent">
-        <form onSubmit={(e)=>this._handleSubmit(e)}>
-         <img src={imagePreviewUrl ? imagePreviewUrl : defaultImage} className="defaultImage" alt="image default" />
+        { uploadedProfileImage.isFetching
+         ? <span className="loading"><img src={logoSymbol} /></span>
+         : <form>
+         <img src={imagePreviewUrl ? imagePreviewUrl : defaultImage} className="defaultImage" alt="image default" /> 
             <label>
               {
                 imagePreviewUrl !== null
@@ -53,14 +71,28 @@ class ImageUpload extends React.Component {
               <input
                 style={{ display: "none" }}
                 type="file"
+                accept="image/x-png,image/gif,image/jpeg"
                 onChange={(e)=>this._handleImageChange(e)}
               />
             </label>
             <span className="cancelUpload" onClick={(e)=> this._handleCancel()}>Cancel</span>
         </form>
+      }
       </div>
+    
     )
   }
 }
 
-export default ImageUpload;
+ImageUpload.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
+
+function mapStateToProps(state) {
+  const { uploadedProfileImage } = state;
+  return {
+    uploadedProfileImage,
+  }
+}
+
+export default connect(mapStateToProps)(ImageUpload);

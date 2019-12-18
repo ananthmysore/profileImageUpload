@@ -8,17 +8,30 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    /* animation: App-logo-spin infinite 20s linear; */
+  .loading img {
+    animation: App-logo-spin infinite 20s linear;
+    width:5em;
+    position:absolute;
+    top:45%;
+    left:45%;
   }
 }
-
+.loading {
+  display: block;
+  width:100vw;
+  height:100vh;
+  background-color:black;
+  opacity: 0.8;
+  color:#FFF;
+}
 .logo{
   height:50px;
 }
 .userProfileImage {
   height:50px;
+  width:50px;
   cursor: pointer;
+  border-radius:50%;
 }
 
 .defaultImage  {
