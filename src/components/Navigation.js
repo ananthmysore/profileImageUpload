@@ -3,13 +3,9 @@ import logo from '../logo.png';
 import defaultUser from '../user.png';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import logoSymbol from '../logo-symbol.png';
 
 
 class Navigation extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   state = {
     uploadedProfileImage: null
   }

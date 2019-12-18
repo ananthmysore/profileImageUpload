@@ -24,8 +24,7 @@ export function receiveResponseImgurErr(error) {
 
 export function uploadProfileImage(file) {
   const myHeaders = new Headers();
-  // TO DO - Get the client ID from env 
-  myHeaders.append("Authorization", "Client-ID 896b364ff00ac5a");
+  myHeaders.append("Authorization", `Client-ID ${process.env.REACT_APP_API_KEY}`);
   const formdata = new FormData();
   formdata.append("image", file);
   const requestOptions = {

@@ -59,13 +59,13 @@ class ImageUpload extends React.Component {
     return (
       <div className="previewComponent">
         { uploadedProfileImage.isFetching
-         ? <span className="loading"><img src={logoSymbol} /></span>
+         ? <span className="loading"><img src={logoSymbol} alt="spinner" /></span>
          : <form>
-         <img src={imagePreviewUrl ? imagePreviewUrl : defaultImage} className="defaultImage" alt="image default" /> 
+         <img src={imagePreviewUrl ? imagePreviewUrl : defaultImage} className="defaultImage" alt="default" /> 
             <label>
               {
                 imagePreviewUrl !== null
-                ? <span className="selectPhotoBtn" onClick={(e)=>this._handleSubmit(e)}>Make it a Profile Pic</span>
+                ? <span className="selectPhotoBtn" onClick={(e)=>this._handleSubmit(e)}>Make this my Profile Picture</span>
                 : <span className="selectPhotoBtn">Select a Photo</span>
               }
               <input
