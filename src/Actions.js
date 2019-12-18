@@ -39,6 +39,6 @@ export function uploadProfileImage(file) {
     return fetch('https://api.imgur.com/3/image', requestOptions)
     .then(response => response.json())
     .then(result => dispatch(receiveResponseImgur(result)))
-    .catch(error => console.log('error', error));
+    .catch(error => dispatch(receiveResponseImgurErr(error)));
   };
 };
